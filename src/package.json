@@ -1,14 +1,20 @@
 {
-  "name": "url-shortening",
+  "name": "url-shortening-service",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "URL shortening service with DynamoDB",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "offline": "sls offline start --port 3030"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.373.0"
+    "aws-sdk": "^2.373.0",
+    "express": "^4.16.4",
+    "serverless-http": "^1.8.0"
+  },
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.35",
+    "serverless-offline": "^3.31.3"
   }
 }
