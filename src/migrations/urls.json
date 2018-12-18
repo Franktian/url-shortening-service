@@ -1,16 +1,15 @@
-
 {
     "Table": {
-        "TableName": "url-shortening-service-dev",
+        "TableName": "url-shortening-service",
         "KeySchema": [
             {
-                "AttributeName": "id",
+                "AttributeName": "hash",
                 "KeyType": "HASH"
             }
         ],
         "AttributeDefinitions": [
             {
-                "AttributeName": "id",
+                "AttributeName": "hash",
                 "AttributeType": "S"
             }
         ],

@@ -1,4 +1,5 @@
 const utils = require('./utils.js');
+const dynamoDb = require('./dynamodb');
 
 module.exports.createUrl = (event, context, callback) => {
     const timestamp = new Date().getTime();
@@ -13,15 +14,35 @@ module.exports.createUrl = (event, context, callback) => {
         });
     }
 
-    const hash = utils.generate_hash_url(data.originalUrl);
+    const hash = utils.generate_hash_url();
 
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify({
-            status: 'Success',
-            data: {}
-        })
+    const params = {
+        TableName: process.env.DYNAMODB_TABLE,
+        Item: {
+            hash: hash,
+            originalUrl: data.originalUrl,
+            createdAt: timestamp,
+            updatedAt: timestamp,
+        }
     };
 
-    callback(null, response);
+    dynamoDb.put(params, (error) => {
+        // handle potential errors
+        if (error) {
+            console.error(error);
+            callback(null, {
+                statusCode: error.statusCode || 501,
+                headers: { 'Content-Type': 'text/plain' },
+                body: 'Couldn\'t create the todo item.',
+            });
+            return;
+        }
+
+        // create a response
+        const response = {
+            statusCode: 200,
+            body: JSON.stringify(hash),
+        };
+        callback(null, response);
+    });
 };

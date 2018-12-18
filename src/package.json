@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "URL shortening service with DynamoDB",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "offline": "sls offline start --port 3030"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
