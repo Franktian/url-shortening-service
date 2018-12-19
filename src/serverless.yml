@@ -6,6 +6,7 @@ provider:
   stage: dev
   environment:
     DYNAMODB_TABLE: ${self:service}
+    BASE_URL: http://localhost:3000/
   region: us-east-1
   iamRoleStatements:
     - Effect: Allow
@@ -44,7 +45,7 @@ functions:
     handler: get.getUrl
     events:
       - http:
-          path: get
+          path: /{hash}
           method: get
           cors: true
 

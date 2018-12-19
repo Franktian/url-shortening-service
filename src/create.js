@@ -14,6 +14,8 @@ module.exports.createUrl = (event, context, callback) => {
         });
     }
 
+    console.log('Base url', process.env.BASE_URL);
+
     const hash = utils.generate_hash_url();
 
     const params = {
@@ -22,7 +24,6 @@ module.exports.createUrl = (event, context, callback) => {
             hash: hash,
             originalUrl: data.originalUrl,
             createdAt: timestamp,
-            updatedAt: timestamp,
         }
     };
 
@@ -41,7 +42,7 @@ module.exports.createUrl = (event, context, callback) => {
         // create a response
         const response = {
             statusCode: 200,
-            body: JSON.stringify(hash),
+            body: JSON.stringify(`${process.env.BASE_URL}${hash}`),
         };
         callback(null, response);
     });
