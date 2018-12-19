@@ -21,8 +21,10 @@ module.exports.getUrl = (event, context, callback) => {
         }
 
         const response = {
-            statusCode: 200,
-            body: JSON.stringify(result.Item.originalUrl)
+            statusCode: 301,
+            headers: {
+                Location: result.Item.originalUrl,
+            }
         };
 
         callback(null, response);
